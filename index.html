@@ -3,114 +3,338 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panduan Menggoreng Ubi Ungu Lumer | Chill'n Bites</title>
+    <title>Panduan Ubi Ungu Lumer | Chill'n Bites</title>
     <style>
+        :root {
+            --primary-color: #7b2cbf; /* Purple Ubi */
+            --secondary-color: #d896ff; /* Lighter Purple */
+            --logo-peach: #f9d8d4; /* Color from Chill'n Bites logo */
+            --text-dark: #333;
+            --text-light: #fff;
+            --background: #fcfaff;
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #fcf9ff;
-            color: #333;
-            line-height: 1.6;
             margin: 0;
             padding: 0;
+            background-color: var(--background);
+            color: var(--text-dark);
+            line-height: 1.6;
+            scroll-behavior: smooth;
         }
+
         .container {
-            max-width: 600px;
-            margin: 40px auto;
-            background: #ffffff;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 40px 20px;
         }
+
+        /* --- Header & Slogan --- */
         .header {
             text-align: center;
-            margin-bottom: 30px;
-            border-bottom: 2px solid #e0d4f5;
-            padding-bottom: 20px;
+            margin-bottom: 50px;
         }
-        .header h1 {
-            color: #5a3d7c;
-            margin: 0;
-        }
-        .header p {
+
+        .slogan {
+            font-size: 1.1em;
             color: #777;
             font-style: italic;
+            margin-bottom: 10px;
         }
-        .steps {
-            margin-bottom: 30px;
+
+        .logo-container {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 20px;
         }
-        .step-item {
-            background: #f4effa;
+
+        .logo-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background-color: var(--logo-peach);
+            border: 5px solid var(--text-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .logo-circle img {
+            width: 80%;
+            filter: drop-shadow(2px 2px 2px rgba(0,0,0,0.1));
+        }
+
+        .main-title {
+            font-family: 'Pacifico', cursive; /* or a wavy font */
+            font-size: 2.5em;
+            color: var(--primary-color);
+            margin: 0;
+            line-height: 1.2;
+        }
+
+        /* --- Path of Hearts Progress Bar --- */
+        .progress-bar {
+            width: 80%;
+            margin: 0 auto 50px auto;
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .progress-bar::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 5px;
+            right: 5px;
+            height: 4px;
+            background-color: #e0d4f5;
+            transform: translateY(-50%);
+            z-index: 1;
+        }
+
+        .progress-dot {
+            width: 40px;
+            height: 40px;
+            background-color: #e0d4f5;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--text-light);
+            z-index: 2;
+            transition: background 0.3s;
+        }
+
+        .progress-dot.active {
+            background-color: var(--primary-color);
+            box-shadow: 0 0 10px rgba(123, 44, 191, 0.5);
+        }
+
+        /* --- Cooking Guide Cards --- */
+        .guide-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .step-card {
+            background: #fff;
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 8px solid #dcd1e5;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s, border-left-color 0.3s, box-shadow 0.3s;
+            position: relative;
+        }
+
+        .step-card:hover {
+            transform: translateY(-5px);
+            border-left-color: var(--primary-color);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .card-number {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: var(--secondary-color);
+            position: absolute;
+            top: 20px;
+            right: 25px;
+        }
+
+        .card-icon {
+            font-size: 2em;
             margin-bottom: 15px;
-            padding: 15px 20px;
-            border-radius: 8px;
-            border-left: 5px solid #8e62c5;
+            color: var(--primary-color);
         }
-        .step-item h3 {
-            margin-top: 0;
-            color: #4a2e6b;
+
+        .card-title {
+            font-size: 1.3em;
+            color: var(--text-dark);
+            margin: 0 0 10px 0;
+            font-weight: 600;
+        }
+
+        .card-desc {
+            font-size: 0.95em;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .frida-secret {
+            background-color: #f7f3ff;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-style: italic;
+            border-left: 4px solid #e0d4f5;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .frida-secret .chat-icon {
             font-size: 1.1em;
+            margin-right: 10px;
+            margin-top: 3px;
         }
-        .step-item p {
-            margin-bottom: 0;
-        }
-        .contact {
-            background: #fff0f5;
-            padding: 20px;
-            border-radius: 8px;
+
+        /* --- Information & Contact Section --- */
+        .footer {
+            background-color: #fff0f5; /* Warm and complementary */
+            border-radius: 15px;
+            padding: 40px;
             text-align: center;
+            box-shadow: 0 -5px 15px rgba(0,0,0,0.03);
             border: 1px dashed #d1a3c4;
         }
-        .contact h3 {
+
+        .footer h3 {
+            color: #a05282;
             margin-top: 0;
-            color: #a05282;
-            margin-bottom: 15px;
+            margin-bottom: 25px;
+            font-size: 1.5em;
         }
-        .contact p {
-            margin: 5px 0;
+
+        .contact-methods {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
         }
-        .contact a {
-            color: #a05282;
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            background: #fff;
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
             text-decoration: none;
-            font-weight: bold;
+            color: var(--text-dark);
+        }
+
+        .contact-item:hover {
+            transform: scale(1.03);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .contact-item .icon {
+            font-size: 1.5em;
+            margin-right: 15px;
+        }
+
+        .wa-icon { color: #25D366; }
+        .ig-icon { color: #C13584; }
+
+        .location {
+            margin-top: 25px;
+            color: #777;
+            font-size: 0.9em;
+        }
+
+        .deploy-note {
+            text-align: center;
+            font-size: 0.8em;
+            color: #999;
+            margin-top: 20px;
+        }
+
+        /* --- Media Queries --- */
+        @media (max-width: 600px) {
+            .progress-bar { width: 90%; }
+            .guide-grid { grid-template-columns: 1fr; }
+            .main-title { font-size: 2em; }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>Chill'n Bites</h1>
-            <p>Panduan Menggoreng Ubi Ungu Lumer</p>
+            <p class="slogan">~ cemilan mu habis? kesini tempatnya ~</p>
+            <div class="logo-container">
+                <div class="logo-circle">
+                    <img src="https://i.ibb.co/3W6qWbH/Screenshot-2024-03-14-at-23-40-52.png" alt="Chill'n Bites Logo">
+                </div>
+            </div>
+            <h1 class="main-title">Panduan Ubi Ungu Lumer</h1>
         </div>
 
-        <div class="steps">
-            <div class="step-item">
-                <h3>1. Persiapan Minyak</h3>
-                <p>Tuangkan minyak goreng ke dalam wajan. Pastikan volume minyak cukup banyak agar ubi dapat terendam dengan baik (tidak terlalu sedikit).</p>
+        <div class="progress-bar">
+            <div class="progress-dot active">1</div>
+            <div class="progress-dot">2</div>
+            <div class="progress-dot">3</div>
+            <div class="progress-dot">4</div>
+        </div>
+
+        <div class="guide-grid">
+            <div class="step-card">
+                <span class="card-number">01</span>
+                <div class="card-icon">🛢️</div>
+                <h3 class="card-title">Minyak yang Cukup</h3>
+                <p class="card-desc">Langkah pertama yang krusial. Pastikan minyak goreng menutupi ubi ungu (deep fry level). Jangan pelit minyak agar matang merata.</p>
+                <div class="frida-secret">
+                    <span class="chat-icon">💬</span>
+                    <span>"tuang minyak, jgn terlalu dikit"</span>
+                </div>
             </div>
-            <div class="step-item">
-                <h3>2. Pengaturan Suhu Awal</h3>
-                <p>Panaskan minyak menggunakan tingkat api sedang yang cenderung kecil.</p>
+
+            <div class="step-card">
+                <span class="card-number">02</span>
+                <div class="card-icon">🔥</div>
+                <h3 class="card-title">Pengaturan Suhu</h3>
+                <p class="card-desc">Suhu sempurna untuk isi yang lumer! Panaskan minyak dengan api sedang (kecenderungan kecil). Jangan terlalu panas di awal.</p>
+                <div class="frida-secret">
+                    <span class="chat-icon">💬</span>
+                    <span>"pakai api sedang cenderung kecil aja"</span>
+                </div>
             </div>
-            <div class="step-item">
-                <h3>3. Proses Menggoreng</h3>
-                <p>Setelah minyak dipastikan panas, masukkan ubi ungu lumer. Segera atur kompor ke kondisi api kecil.</p>
+
+            <div class="step-card">
+                <span class="card-number">03</span>
+                <div class="card-icon">🌀</div>
+                <h3 class="card-title">Memasukkan Ubi</h3>
+                <p class="card-desc">Setelah minyak panas, kecilkan api kompor sepenuhnya. Perlahan, masukkan ubi ungu lumer untuk proses pematangan perlahan.</p>
+                <div class="frida-secret">
+                    <span class="chat-icon">💬</span>
+                    <span>"trs klo dah panas, cemplungin dgn kondisi api kecil"</span>
+                </div>
             </div>
-            <div class="step-item">
-                <h3>4. Pematangan Merata</h3>
-                <p>Balik ubi secara berkala selama proses menggoreng agar matang secara merata di semua sisi.</p>
-            </div>
-            <div class="step-item">
-                <h3>5. Penyajian</h3>
-                <p>Apabila warna ubi sudah berubah menjadi kecoklatan, angkat dan tiriskan. Ubi ungu lumer siap untuk dinikmati.</p>
+
+            <div class="step-card">
+                <span class="card-number">04</span>
+                <div class="card-icon">🔄</div>
+                <h3 class="card-title">Pemutaran & Penyajian</h3>
+                <p class="card-desc">Tekstur renyah merata adalah kuncinya. Jangan lupa membalikkan ubi secara berkala. Sajikan saat masih hangat untuk sensasi lumer.</p>
+                <div class="frida-secret">
+                    <span class="chat-icon">💬</span>
+                    <span>"bolak balik jangan lupa" ... "kalau udah kecoklatan, angkat dan makann"</span>
+                </div>
             </div>
         </div>
 
-        <div class="contact">
+        <div class="footer">
             <h3>Informasi & Pemesanan</h3>
-            <p><strong>WhatsApp:</strong> <a href="https://wa.me/6288808135812" target="_blank">Frida (+62 888-0813-5812)</a></p>
-            <p><strong>Instagram:</strong> <a href="https://instagram.com/chilln.bites" target="_blank">@chilln.bites</a></p>
-            <p><strong>Lokasi:</strong> Salatiga, Jawa Tengah</p>
+            <div class="contact-methods">
+                <a href="https://wa.me/6288808135812" class="contact-item" target="_blank">
+                    <span class="icon wa-icon">💬</span>
+                    <span><strong>Frida</strong><br>+62 888-0813-5812</span>
+                </a>
+                <a href="https://instagram.com/chilln.bites" class="contact-item" target="_blank">
+                    <span class="icon ig-icon">📸</span>
+                    <span><strong>@chilln.bites</strong><br>Home made by @frdaenjlk_</span>
+                </a>
+            </div>
+            <p class="location">Lokasi: Salatiga, Jawa Tengah | Order? DM ajaa yaa.</p>
         </div>
+
+        <p class="deploy-note">Didesain untuk *deployment* di GitHub Pages.</p>
     </div>
 </body>
 </html>
